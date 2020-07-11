@@ -35,3 +35,26 @@ std::string decrypt(const std::string& input, int key) {
 	}
 	return output;
 }
+
+int check(const std::string& plaintext, const std::string& ciphertext) {
+	int k;
+	if(plaintext.size() != ciphertext.size()) return 27;
+	for(int i = 0; i < plaintext.size(); ++i) {
+		if(plaintext[i] >= 0x21 && plaintext[i] <= 0x40 ||
+			 plaintext[i] >= 0x5b && plaintext[i] <= 0x60 ||
+			 plaintext[i] >= 0x7b && plaintext[i] <= 0x7e)
+			continue;
+		else {
+			k = ciphertext[i] - plaintext[i];
+			break;
+		}
+	}
+	for(int i = 1; i < plaintext.size(); ++i) {
+		if(plaintext[i] >= 0x21 && plaintext[i] <= 0x40 ||
+			 plaintext[i] >= 0x5b && plaintext[i] <= 0x60 ||
+			 plaintext[i] >= 0x7b && plaintext[i] <= 0x7e)
+			continue;
+		else if(ciphertext[i] - plaintext[i] != k) return 27;
+	}
+	return k;
+}

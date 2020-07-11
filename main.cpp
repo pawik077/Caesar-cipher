@@ -68,8 +68,34 @@ int main() {
 				std::cout << "Decrypted text: " << decrypt(input, key);
 				break;
 			}
-			case 3:
+			case 3: {
+				std::string plaintext;
+				std::string ciphertext;
+				std::cout << "Plaintext: ";
+				std::cin >> plaintext;
+				while(std::cin.fail()) {
+					std::cerr << "Invalid input!" << std::endl;
+					std::cin.clear();
+					std::cin.ignore(10000, '\n');
+					std::cout << "Plaintext: ";
+					std::cin >> plaintext;
+				}
+				std::cout << "Ciphertext: ";
+				std::cin >> ciphertext;
+				while(std::cin.fail()) {
+					std::cerr << "Invalid input!" << std::endl;
+					std::cin.clear();
+					std::cin.ignore(10000, '\n');
+					std::cout << "Ciphertext: ";
+					std::cin >> ciphertext;
+				}
+				int k = check(plaintext, ciphertext);
+				if(k == 27) std::cout << "Text is *NOT* correctly encrypted";
+				else if(k < 0) std::cout << "Text is reversely encrypted with key " << k;
+				else if(k == 0) std::cout << "Text is not encrypted, ciphertext is the same as plaintext";
+				else if(k > 0 && k < 26) std::cout << "Text is correctly encrypted with key " << k;
 				break;
+			}
 			default:
 				std::cerr << "Invalid option!";
 				op = -1;
