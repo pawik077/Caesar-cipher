@@ -12,9 +12,9 @@ int main() {
 		std::cout << "0 - Exit\n";
 		std::cout << "Your choice: ";
 		std::cin >> op;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');
 		while(std::cin.fail()) {
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
 			op = -1;
 		}
 		switch(op) {
@@ -23,13 +23,14 @@ int main() {
 				std::string input;
 				int key;
 				std::cout << "Text to encrypt: ";
-				std::cin >> input;
+				getline(std::cin, input);
 				while(std::cin.fail()) {
 					std::cerr << "Incorrect input!" << std::endl;
 					std::cin.clear();
 					std::cin.ignore(10000, '\n');
+					input = "";
 					std::cout << "Text to encrypt: ";
-					std::cin >> input;
+					getline(std::cin, input);
 				}
 				std::cout << "Encryption key: ";
 				std::cin >> key;
@@ -40,7 +41,7 @@ int main() {
 					std::cout << "Encryption key: ";
 					std::cin >> key;
 				}
-				std::cout << "Encrypted text: " << encrypt(input, key);
+				std::cout << "Encrypted text: " << encrypt(input, key) << std::endl;
 				break;
 			}
 			case 2:
@@ -48,13 +49,13 @@ int main() {
 				std::string input;
 				int key;
 				std::cout << "Text to decrypt: ";
-				std::cin >> input;
+				getline(std::cin, input);
 				while(std::cin.fail()) {
 					std::cerr << "Invalid input!" << std::endl;
 					std::cin.clear();
 					std::cin.ignore(10000, '\n');
 					std::cout << "Text to decrypt: ";
-					std::cin >> input;
+					getline(std::cin, input);
 				}
 				std::cout << "Decryption key: ";
 				std::cin >> key;
@@ -65,35 +66,34 @@ int main() {
 					std::cout << "Decryption key: ";
 					std::cin >> key;
 				}
-				std::cout << "Decrypted text: " << decrypt(input, key);
+				std::cout << "Decrypted text: " << decrypt(input, key) << std::endl;
 				break;
 			}
 			case 3: {
 				std::string plaintext;
 				std::string ciphertext;
 				std::cout << "Plaintext: ";
-				std::cin >> plaintext;
+				getline(std::cin, plaintext);
 				while(std::cin.fail()) {
 					std::cerr << "Invalid input!" << std::endl;
 					std::cin.clear();
 					std::cin.ignore(10000, '\n');
 					std::cout << "Plaintext: ";
-					std::cin >> plaintext;
+					getline(std::cin, plaintext);
 				}
 				std::cout << "Ciphertext: ";
-				std::cin >> ciphertext;
+				getline(std::cin, ciphertext);
 				while(std::cin.fail()) {
 					std::cerr << "Invalid input!" << std::endl;
 					std::cin.clear();
 					std::cin.ignore(10000, '\n');
 					std::cout << "Ciphertext: ";
-					std::cin >> ciphertext;
+					getline(std::cin, ciphertext);
 				}
 				int k = check(plaintext, ciphertext);
-				if(k == 27) std::cout << "Text is *NOT* correctly encrypted";
-				else if(k < 0) std::cout << "Text is reversely encrypted with key " << k;
-				else if(k == 0) std::cout << "Text is not encrypted, ciphertext is the same as plaintext";
-				else if(k > 0 && k < 26) std::cout << "Text is correctly encrypted with key " << k;
+				if(k == 27) std::cout << "Text is *NOT* correctly encrypted" << std::endl;
+				else if(k == 0) std::cout << "Text is not encrypted, ciphertext is the same as plaintext" << std::endl;
+				else if(k > 0 && k < 26) std::cout << "Text is correctly encrypted with key " << k << std::endl;
 				break;
 			}
 			case 0:
