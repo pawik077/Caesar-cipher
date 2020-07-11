@@ -96,6 +96,8 @@ int main() {
 				else if(k > 0 && k < 26) std::cout << "Text is correctly encrypted with key " << k;
 				break;
 			}
+			case 0:
+				break;
 			default:
 				std::cerr << "Invalid option!";
 				op = -1;
