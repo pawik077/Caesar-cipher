@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Caesar.hh"
 
 int main() {
 	int op;
@@ -19,8 +20,30 @@ int main() {
 	switch(op) {
 		case 1:
 			break;
-		case 2:
+		case 2:	{
+			std::string input;
+			int key;
+			std::cout << "Text to decrypt: ";
+			std::cin >> input;
+			while(std::cin.fail()) {
+				std::cerr << "Invalid input!" << std::endl;
+				std::cin.clear();
+				std::cin.ignore(10000, '\n');
+				std::cout << "Text to decrypt: ";
+				std::cin >> input;
+			}
+			std::cout << "Decryption key: ";
+			std::cin >> key;
+			while(std::cin.fail()) {
+				std::cerr << "Invalid decryption key!" << std::endl;
+				std::cin.clear();
+				std::cin.ignore(10000, '\n');
+				std::cout << "Decryption key: ";
+				std::cin >> key;
+			}
+			std::cout << "Decrypted text: " << decrypt(input, key);
 			break;
+		}
 		case 3:
 			break;
 		default:
