@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Caesar.hh"
 
 int main() {
 	int op;
@@ -17,8 +18,30 @@ int main() {
 		std::cin >> op;
 	}
 	switch(op) {
-		case 1:
+		case 1: {
+			std::string input;
+			int key;
+			std::cout << "Text to encrypt: ";
+			std::cin >> input;
+			while(std::cin.fail()) {
+				std::cerr << "Incorrect input!" << std::endl;
+				std::cin.clear();
+				std::cin.ignore(10000, '\n');
+				std::cout << "Text to encrypt: ";
+				std::cin >> input;
+			}
+			std::cout << "Encryption key: ";
+			std::cin >> key;
+			while(std::cin.fail()) {
+				std::cerr << "Incorrect encryption key!" << std::endl;
+				std::cin.clear();
+				std::cin.ignore(10000, '\n');
+				std::cout << "Encryption key: ";
+				std::cin >> key;
+			}
+			std::cout << "Encrypted text: " << encrypt(input, key);
 			break;
+		}
 		case 2:
 			break;
 		case 3:
