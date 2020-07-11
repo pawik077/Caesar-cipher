@@ -41,6 +41,7 @@ int main() {
 			}
 			std::cout << "Encrypted text: " << encrypt(input, key);
 			break;
+		}
 		case 2:	{
 			std::string input;
 			int key;
